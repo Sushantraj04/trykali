@@ -1,0 +1,9 @@
+@import "@xterm/xterm/css/xterm.css";
+
+/* Terminal custom styles */
+.xterm-viewport {
+  border-radius: 0.5rem;
+}
+.xterm {
+  padding: 10px;
+}
