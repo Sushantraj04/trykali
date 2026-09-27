@@ -215,6 +215,7 @@ export default function App() {
               }}
               onOpenAuth={() => setIsAuthOpen(true)}
               onSendToTerminal={handleSendToTerminal}
+              setActiveTab={setActiveTab}
             />
           )}
 
