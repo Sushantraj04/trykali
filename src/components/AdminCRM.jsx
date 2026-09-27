@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { cyberAuth } from '../utils/supabaseClient';
 
-export function AdminCRMView({ currentUser, onSendToTerminal, onOpenAuth }) {
+export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpenAuth }) {
   // Admin Authorization State
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(false);
   const [adminPinInput, setAdminPinInput] = useState('');
@@ -308,6 +308,15 @@ export function AdminCRMView({ currentUser, onSendToTerminal, onOpenAuth }) {
             </button>
             <span className="text-slate-500 text-[11px]">(Default Key: <code className="text-rose-400">admin2026</code>)</span>
           </div>
+
+          <div className="pt-2">
+            <button
+              onClick={() => onNavigate ? onNavigate('dashboard') : (window.location.href = '/')}
+              className="text-xs font-mono text-slate-400 hover:text-white underline cursor-pointer"
+            >
+              ← Cancel &amp; Return to Public Labs
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -315,6 +324,20 @@ export function AdminCRMView({ currentUser, onSendToTerminal, onOpenAuth }) {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 font-sans">
+      {/* Secret Route Notification & Public Return Button */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#090d18] border border-rose-500/30 text-xs font-mono shadow-lg">
+        <div className="flex items-center space-x-2 text-rose-300">
+          <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0" />
+          <span>Secret Admin Route: <strong className="text-white font-bold">/admin</strong> (Hidden from public navigation bar)</span>
+        </div>
+        <button
+          onClick={() => onNavigate ? onNavigate('dashboard') : (window.location.href = '/')}
+          className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all flex items-center space-x-1.5 cursor-pointer font-bold"
+        >
+          <span>← Return to Public Labs</span>
+        </button>
+      </div>
+
       {/* Top Banner & Control Bar */}
       <div className="glass-card p-6 rounded-2xl relative overflow-hidden shadow-2xl border border-rose-500/20">
         <div className="absolute top-0 right-0 w-96 h-96 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />

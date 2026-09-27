@@ -16,8 +16,56 @@ import { cyberAuth } from './utils/supabaseClient';
 import { LABS_DATA } from './data/labsData';
 import { Terminal as TerminalIcon } from 'lucide-react';
 
+// Helper to determine active tab from browser URL
+function getTabFromLocation() {
+  if (typeof window === 'undefined') return 'terminal';
+  const pathname = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const search = new URLSearchParams(window.location.search);
+
+  // Dedicated Secret Route for Admin Panel
+  if (pathname === '/admin' || pathname.startsWith('/admin') || hash === '#admin' || search.get('page') === 'admin' || search.get('tab') === 'admin') {
+    return 'admin';
+  }
+  if (pathname === '/dashboard' || hash === '#dashboard') return 'dashboard';
+  if (pathname === '/social' || hash === '#social') return 'social';
+  if (pathname === '/tools' || hash === '#tools') return 'tools';
+  if (pathname === '/utilities' || hash === '#utilities') return 'utilities';
+  if (pathname === '/roadmap' || hash === '#roadmap') return 'roadmap';
+  if (pathname === '/ai' || hash === '#ai') return 'ai';
+  return 'terminal';
+}
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState('terminal');
+  const [activeTab, setActiveTabState] = useState(getTabFromLocation);
+
+  // Synchronize state changes with browser URL
+  const setActiveTab = useCallback((tab) => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      if (tab === 'admin') {
+        window.history.pushState(null, '', '/admin');
+      } else if (tab === 'terminal') {
+        window.history.pushState(null, '', '/');
+      } else {
+        window.history.pushState(null, '', `/${tab}`);
+      }
+    }
+  }, []);
+
+  // Listen for browser forward/back or direct URL navigation
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setActiveTabState(getTabFromLocation());
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
   const [activeLabId, setActiveLabId] = useState('lab-recon');
   const [labs, setLabs] = useState(LABS_DATA);
   const [totalXP, setTotalXP] = useState(150);
@@ -260,6 +308,7 @@ export default function App() {
           {activeTab === 'admin' && (
             <AdminCRMView
               currentUser={user}
+              onNavigate={setActiveTab}
               onSendToTerminal={handleSendToTerminal}
               onOpenAuth={() => setIsAuthOpen(true)}
             />
@@ -276,8 +325,6 @@ export default function App() {
               <span className="hover:text-slate-400 cursor-pointer" onClick={() => setActiveTab('terminal')}>Terminal</span>
               <span>•</span>
               <span className="hover:text-purple-400 cursor-pointer" onClick={() => setActiveTab('social')}>Social Attacks</span>
-              <span>•</span>
-              <span className="hover:text-rose-400 cursor-pointer" onClick={() => setActiveTab('admin')}>Admin CRM</span>
               <span>•</span>
               <span className="hover:text-slate-400 cursor-pointer" onClick={() => setActiveTab('tools')}>Tools</span>
               <span>•</span>

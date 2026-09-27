@@ -24,7 +24,6 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
     { id: 'utilities', label: 'Wordlists', icon: Wrench, color: 'text-amber-400', activeBg: 'bg-amber-500/15 text-amber-400 border-amber-500/40 shadow-sm' },
     { id: 'roadmap', label: 'Roadmap', icon: Compass, color: 'text-rose-400', activeBg: 'bg-rose-500/15 text-rose-400 border-rose-500/40 shadow-sm' },
     { id: 'ai', label: 'AI Mentor', icon: Cpu, color: 'text-violet-300', activeBg: 'bg-violet-500/15 text-violet-300 border-violet-500/40 shadow-sm' },
-    { id: 'admin', label: 'Admin CRM', icon: ShieldAlert, color: 'text-rose-400', activeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-rose-500/20 font-bold' },
   ];
 
   return (
@@ -146,18 +145,17 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
               </button>
             )}
 
-            {/* Quick Admin CRM Trigger */}
-            <button
-              onClick={() => setActiveTab('admin')}
-              className={`p-2 rounded-xl border transition-all cursor-pointer ${
-                activeTab === 'admin'
-                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-md shadow-rose-500/10'
-                  : 'bg-[#090d18] text-slate-400 hover:text-rose-300 hover:bg-rose-950/20 border-white/10'
-              }`}
-              title="Open Admin CRM Panel"
-            >
-              <ShieldAlert className="w-4 h-4 text-rose-400" />
-            </button>
+            {/* Only show secret badge if currently browsing the hidden /admin route */}
+            {activeTab === 'admin' && (
+              <button
+                onClick={() => setActiveTab('dashboard')}
+                className="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/40 text-xs font-mono font-bold transition-all cursor-pointer flex items-center space-x-1"
+                title="Exit Admin and return to Public Labs"
+              >
+                <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
+                <span className="hidden sm:inline">Exit Admin (/admin)</span>
+              </button>
+            )}
           </div>
         </div>
 
