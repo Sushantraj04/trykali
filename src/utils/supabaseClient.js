@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Read environment variables (Vite prefix: VITE_)
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Read environment variables (Vite prefix: VITE_) with default project credentials
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://ajwfsgggtaaqqrwiyiwu.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_CCPXsh985zVNETRRazED3Q_qTufWnZg';
 
 // True only if valid Supabase credentials have been provided
 export const isSupabaseConfigured = Boolean(
