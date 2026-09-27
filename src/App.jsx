@@ -8,6 +8,7 @@ import { RoadmapView } from './components/Roadmap';
 import { AIMentor } from './components/AIMentor';
 import { DashboardView } from './components/Dashboard';
 import { SocialEngineeringSuite } from './components/SocialEngineering';
+import { AdminCRMView } from './components/AdminCRM';
 import { BinaryBackground } from './components/BinaryBackground';
 import { AuthModal } from './components/AuthModal';
 import { TerminalSimulator } from './utils/terminalEngine';
@@ -255,6 +256,14 @@ export default function App() {
               terminalContext={terminalContext}
             />
           )}
+
+          {activeTab === 'admin' && (
+            <AdminCRMView
+              currentUser={user}
+              onSendToTerminal={handleSendToTerminal}
+              onOpenAuth={() => setIsAuthOpen(true)}
+            />
+          )}
         </main>
 
         {/* Footer */}
@@ -267,6 +276,8 @@ export default function App() {
               <span className="hover:text-slate-400 cursor-pointer" onClick={() => setActiveTab('terminal')}>Terminal</span>
               <span>•</span>
               <span className="hover:text-purple-400 cursor-pointer" onClick={() => setActiveTab('social')}>Social Attacks</span>
+              <span>•</span>
+              <span className="hover:text-rose-400 cursor-pointer" onClick={() => setActiveTab('admin')}>Admin CRM</span>
               <span>•</span>
               <span className="hover:text-slate-400 cursor-pointer" onClick={() => setActiveTab('tools')}>Tools</span>
               <span>•</span>
