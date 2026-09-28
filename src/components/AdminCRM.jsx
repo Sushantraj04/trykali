@@ -67,14 +67,8 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
       setIsAdminUnlocked(true);
       setPinError('');
     } else {
-      setPinError('Invalid Admin Passkey. Hint: use admin2026 or click Quick Demo Access.');
+      setPinError('Invalid Master Passkey. Access Denied.');
     }
-  };
-
-  // Quick Demo Unlock
-  const handleQuickDemoAccess = () => {
-    setIsAdminUnlocked(true);
-    setPinError('');
   };
 
   // Calculate Key CRM Metrics
@@ -242,13 +236,6 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
     }, 1200);
   };
 
-  // Reset to Demo Data
-  const handleResetDemoData = async () => {
-    if (!window.confirm("Reset CRM database to default multi-month demo users? Any newly registered users will be re-seeded.")) return;
-    await cyberAuth.resetToDemoCRMData();
-    loadCRMData();
-  };
-
   // If Admin Gate is locked, render the Master Access Gate
   if (!isAdminUnlocked) {
     return (
@@ -264,10 +251,10 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
 
           <div>
             <h1 className="text-2xl font-black text-white tracking-tight font-display">
-              CyberKali Operator CRM & Admin Portal
+              CyberKali Operator CRM &amp; Admin Portal
             </h1>
             <p className="text-xs text-slate-400 font-mono mt-1">
-              Restricted Area • Master Session Telemetry, User Inactivity Tracker & Retention Dashboard
+              Restricted Area • Master Session Telemetry &amp; User Retention Dashboard
             </p>
           </div>
 
@@ -297,17 +284,6 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
               Verify Master Credentials
             </button>
           </form>
-
-          <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-mono">
-            <button
-              onClick={handleQuickDemoAccess}
-              className="px-4 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/40 transition-all flex items-center space-x-2 cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-cyber-green" />
-              <span>1-Click Master Access (Demo Mode)</span>
-            </button>
-            <span className="text-slate-500 text-[11px]">(Default Key: <code className="text-rose-400">admin2026</code>)</span>
-          </div>
 
           <div className="pt-2">
             <button
@@ -389,14 +365,6 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
               title="Refresh Registry"
             >
               <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-cyber-green' : ''}`} />
-            </button>
-
-            <button
-              onClick={handleResetDemoData}
-              className="px-2.5 py-2 rounded-xl bg-rose-950/30 hover:bg-rose-900/40 text-rose-300 border border-rose-500/30 text-[11px] transition-all cursor-pointer"
-              title="Reset Demo Users"
-            >
-              Reset Seed
             </button>
           </div>
         </div>
@@ -726,8 +694,12 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
             <tbody className="divide-y divide-slate-800/50">
               {filteredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="text-center py-8 text-slate-500">
-                    No operators match the selected filter or search query.
+                  <td colSpan="7" className="text-center py-12 text-slate-400">
+                    <div className="flex flex-col items-center justify-center space-y-2">
+                      <Users className="w-8 h-8 text-slate-600" />
+                      <p className="font-semibold text-white font-display text-sm">No Registered Operators Found</p>
+                      <p className="text-xs text-slate-500 font-mono max-w-sm">Users who sign up on your live platform will automatically appear here with their session telemetry, XP, and CTF progress.</p>
+                    </div>
                   </td>
                 </tr>
               ) : (
