@@ -23,9 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment
+# Environment and sensitive secrets
 .env
-.env.production
+.env.*
+.env.example
+*.env
 
 # Backend container workspace (kept locally, not needed for Vercel SPA)
 backend/
