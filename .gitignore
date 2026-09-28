@@ -26,3 +26,7 @@ dist-ssr
 # Environment
 .env
 .env.production
+
+# Backend container workspace (kept locally, not needed for Vercel SPA)
+backend/
+backend_backup/
