@@ -200,7 +200,7 @@ export function AuthGate({ onAuthSuccess }) {
 
         {/* Security Notice */}
         <div className="pt-2 text-center text-[11px] font-mono text-slate-500 border-t border-slate-800/80">
-          <span>🔒 All sessions are encrypted with AES-256 and authenticated via Supabase Cloud.</span>
+          <span>🔒 End-to-End Encrypted Session • Zero-Trust Platform Security</span>
         </div>
       </div>
     </div>

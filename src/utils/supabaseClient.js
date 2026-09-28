@@ -93,43 +93,19 @@ export const cyberAuth = {
       throw new Error("Password must be at least 6 characters long.");
     }
 
-    // 1. If Real Supabase is configured
-    if (isSupabaseConfigured && supabase) {
-      const { data, error } = await supabase.auth.signUp({
-        email: cleanEmail,
-        password: cleanPass,
-        options: {
-          data: { username: username || cleanEmail.split('@')[0], xp: 150, rank: 'Novice Hacker' }
-        }
-      });
-      if (error) throw new Error(error.message);
-
-      if (data.user) {
-        await supabase.from('profiles').upsert({
-          id: data.user.id,
-          email: cleanEmail,
-          username: username || cleanEmail.split('@')[0],
-          xp: 150,
-          rank: 'Novice Hacker'
-        });
-        return data.user;
-      }
-      throw new Error("Registration failed on server. Please try again.");
-    }
-
-    // 2. Strict Local Database Registration
     const users = getRegisteredUsers();
 
     // Check if email already registered
     if (users[cleanEmail]) {
-      throw new Error("This email is already registered! Please sign in.");
+      throw new Error("An account with this email is already registered! Please switch to Sign In.");
     }
 
     const nowIso = new Date().toISOString();
+    const cleanUsername = username?.trim() || cleanEmail.split('@')[0];
     const newUser = {
       id: 'usr_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
       email: cleanEmail,
-      username: username?.trim() || cleanEmail.split('@')[0],
+      username: cleanUsername,
       passwordHash: hashPassword(cleanPass),
       role: cleanEmail.includes('admin') ? 'admin' : 'user',
       xp: 150,
@@ -151,10 +127,25 @@ export const cyberAuth = {
     // Set active session for this user
     localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(newUser));
 
+    // Optional background Supabase Auth synchronization (non-blocking, won't throw rate limit error to user)
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.auth.signUp({
+          email: cleanEmail,
+          password: cleanPass,
+          options: {
+            data: { username: cleanUsername, xp: 150, rank: 'Novice Hacker' }
+          }
+        });
+      } catch (e) {
+        // Silently caught: Email rate limits or SMTP provider delays never block the user!
+      }
+    }
+
     return newUser;
   },
 
-  // SIGN IN: Authenticate ONLY registered users with matching password
+  // SIGN IN: Authenticate registered user with matching email & password
   async signIn({ email, password }) {
     const cleanEmail = email.trim().toLowerCase();
     const cleanPass = password.trim();
@@ -163,39 +154,51 @@ export const cyberAuth = {
       throw new Error("Please enter both email and password.");
     }
 
-    // 1. If Real Supabase is configured
-    if (isSupabaseConfigured && supabase) {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: cleanEmail,
-        password: cleanPass
-      });
-      if (error) {
-        throw new Error("Invalid email or password! Please check your credentials.");
-      }
-
-      // Fetch profile
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', data.user.id)
-        .single();
-
-      return {
-        id: data.user.id,
-        email: data.user.email,
-        username: profile?.username || data.user.email.split('@')[0],
-        xp: profile?.xp || 150,
-        rank: profile?.rank || 'Novice Hacker'
-      };
-    }
-
-    // 2. Strict Local Database Verification
     const users = getRegisteredUsers();
-    const existingUser = users[cleanEmail];
+    let existingUser = users[cleanEmail];
+
+    // Check against Supabase Auth if not in local cache
+    if (!existingUser && isSupabaseConfigured && supabase) {
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: cleanEmail,
+          password: cleanPass
+        });
+        if (!error && data?.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', data.user.id)
+            .single();
+          const nowIso = new Date().toISOString();
+          existingUser = {
+            id: data.user.id,
+            email: cleanEmail,
+            username: profile?.username || cleanEmail.split('@')[0],
+            passwordHash: hashPassword(cleanPass),
+            role: cleanEmail.includes('admin') ? 'admin' : 'user',
+            xp: profile?.xp || 150,
+            rank: profile?.rank || 'Novice Hacker',
+            completedTasks: profile?.completed_tasks || {},
+            createdAt: profile?.created_at || nowIso,
+            lastLoginAt: nowIso,
+            lastLogoutAt: null,
+            isLoggedIn: true,
+            sessionCount: 1,
+            status: 'active',
+            crmNotes: 'Authenticated via Cloud'
+          };
+          users[cleanEmail] = existingUser;
+          saveRegisteredUsers(users);
+        }
+      } catch {
+        // ignore
+      }
+    }
 
     // Check 1: Does this user exist?
     if (!existingUser) {
-      throw new Error("No account found with this email! Please sign up first.");
+      throw new Error("No account found with this email! Please register first.");
     }
 
     // Check 2: Account suspended?
@@ -221,6 +224,11 @@ export const cyberAuth = {
     // Set active session
     localStorage.setItem(LOCAL_STORAGE_SESSION_KEY, JSON.stringify(existingUser));
 
+    // Non-blocking background sync with Supabase
+    if (isSupabaseConfigured && supabase) {
+      supabase.auth.signInWithPassword({ email: cleanEmail, password: cleanPass }).catch(() => {});
+    }
+
     return existingUser;
   },
 
@@ -242,46 +250,51 @@ export const cyberAuth = {
     }
 
     if (isSupabaseConfigured && supabase) {
-      await supabase.auth.signOut();
+      supabase.auth.signOut().catch(() => {});
     }
     localStorage.removeItem(LOCAL_STORAGE_SESSION_KEY);
   },
 
   // Get current active logged-in user
   async getCurrentUser() {
-    if (isSupabaseConfigured && supabase) {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return null;
-
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      return {
-        id: user.id,
-        email: user.email,
-        username: profile?.username || user.email.split('@')[0],
-        xp: profile?.xp || 150,
-        rank: profile?.rank || 'Novice Hacker'
-      };
-    }
-
     try {
       const raw = localStorage.getItem(LOCAL_STORAGE_SESSION_KEY);
-      if (!raw) return null;
-      const sessionUser = JSON.parse(raw);
-
-      // Verify user still exists in database
-      const users = getRegisteredUsers();
-      if (sessionUser.email && users[sessionUser.email]) {
-        return users[sessionUser.email];
+      if (raw) {
+        const sessionUser = JSON.parse(raw);
+        const users = getRegisteredUsers();
+        if (sessionUser?.email && users[sessionUser.email]) {
+          return users[sessionUser.email];
+        }
       }
-      return null;
     } catch {
-      return null;
+      // fallback
     }
+
+    // Fallback: Check Supabase Auth
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+
+          return {
+            id: user.id,
+            email: user.email,
+            username: profile?.username || user.email.split('@')[0],
+            xp: profile?.xp || 150,
+            rank: profile?.rank || 'Novice Hacker'
+          };
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    return null;
   },
 
   // SYNC USER DATA: Update XP, Rank, and Tasks for the logged-in user

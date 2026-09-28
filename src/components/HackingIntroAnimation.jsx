@@ -10,7 +10,7 @@ export function HackingIntroAnimation({ onComplete }) {
   const BOOT_LOGS = [
     { text: "INITIALIZING CYBERKALI V2.5 SANDBOX KERNEL 6.12-AMD64...", delay: 0 },
     { text: "ESTABLISHING ENCRYPTED VNET TUNNEL (AES-256-GCM)...", delay: 900 },
-    { text: "CONNECTING TO SUPABASE CLOUD DATABASE... [200 OK]", delay: 1800 },
+    { text: "CALIBRATING ENCRYPTED CLOUD DATASTORE... [200 OK]", delay: 1800 },
     { text: "CALIBRATING 600+ KALI TOOLS & EXPLOIT FRAMEWORKS...", delay: 2700 },
     { text: "ALLOCATING ISOLATED DOCKER CONTAINER (TARGET: 10.10.10.45)...", delay: 3600 },
     { text: "ALL SYSTEMS NOMINAL — ACCESS GRANTED!", delay: 4400 }

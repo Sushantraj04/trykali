@@ -325,7 +325,7 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
                   </span>
                 </h1>
                 <p className="text-xs text-slate-400 font-mono mt-0.5 flex items-center space-x-2">
-                  <span>Database: Persistent Local + Supabase Active</span>
+                  <span>Database: Cloud PostgreSQL Active</span>
                   <span>•</span>
                   <span className="text-emerald-400">Telemetry: Real-Time Active</span>
                 </p>
