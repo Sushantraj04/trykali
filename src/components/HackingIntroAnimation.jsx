@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, Shield, Cpu, Lock, CheckCircle2, Zap } from 'lucide-react';
+import { Terminal, Shield, Cpu, Lock, CheckCircle2, Zap, AlertTriangle } from 'lucide-react';
 
 export function HackingIntroAnimation({ onComplete }) {
   const [progress, setProgress] = useState(0);
@@ -175,8 +175,14 @@ export function HackingIntroAnimation({ onComplete }) {
           </div>
         </div>
 
+        {/* Educational Purpose Disclaimer */}
+        <div className="flex items-center justify-center space-x-2 text-[11px] font-mono text-amber-300/90 bg-amber-500/10 border border-amber-500/25 px-3 py-2 rounded-xl text-center shadow-sm">
+          <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span>Notice: Strictly for educational and ethical learning purposes only.</span>
+        </div>
+
         {/* Skip Button */}
-        <div className="text-center pt-1">
+        <div className="text-center pt-0.5">
           <button
             onClick={handleSkip}
             className="text-[11px] font-mono text-slate-500 hover:text-slate-300 transition-colors underline cursor-pointer"

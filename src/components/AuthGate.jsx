@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Terminal, Shield, Lock, Mail, User, CheckCircle2, AlertCircle, UserPlus, LogIn, Sparkles, ArrowRight } from 'lucide-react';
+import { Terminal, Shield, Lock, Mail, User, CheckCircle2, AlertCircle, UserPlus, LogIn, Sparkles, ArrowRight, AlertTriangle } from 'lucide-react';
 import { cyberAuth } from '../utils/supabaseClient';
 
 export function AuthGate({ onAuthSuccess }) {
@@ -197,6 +197,15 @@ export function AuthGate({ onAuthSuccess }) {
             <ArrowRight className="w-4 h-4 text-slate-950" />
           </button>
         </form>
+
+        {/* Educational Disclaimer Banner */}
+        <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center space-x-2.5 font-mono shadow-sm">
+          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+          <div className="leading-snug">
+            <span className="font-bold text-amber-400">Educational Use Only:</span>{' '}
+            <span className="text-slate-300">This platform is strictly for cybersecurity education, ethical learning, and authorized practice.</span>
+          </div>
+        </div>
 
         {/* Security Notice */}
         <div className="pt-2 text-center text-[11px] font-mono text-slate-500 border-t border-slate-800/80">
