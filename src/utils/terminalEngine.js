@@ -213,7 +213,7 @@ tcp        0      0 0.0.0.0:4444            0.0.0.0:*               LISTEN\n`;
  4) Update the Social-Engineer Toolkit
  5) Help, Credits, and About
 
-\x1b[1;33m[*] For safe interactive simulation, navigate to the 'Social Attacks' tab in CyberKali GUI.\x1b[0m\n`;
+\x1b[1;33m[*] For safe interactive simulation, navigate to the 'Social Attacks' tab in TryKali GUI.\x1b[0m\n`;
 
       case 'ai-explain':
         return this.handleAIExplain(args.join(' '));

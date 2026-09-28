@@ -80,7 +80,7 @@ Feel free to execute commands in the live terminal, paste errors here, and I wil
             </div>
             <div>
               <h3 className="font-bold text-white text-sm sm:text-base flex items-center space-x-2">
-                <span>CyberKali AI Mentor</span>
+                <span>TryKali AI Mentor</span>
                 <span className="text-[10px] bg-cyber-cyan/20 text-cyber-cyan px-2 py-0.5 rounded-full font-mono">
                   Online
                 </span>

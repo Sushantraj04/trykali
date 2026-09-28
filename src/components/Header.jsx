@@ -112,7 +112,7 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
 
             <div className="flex items-center space-x-1.5">
               <span className="text-sm sm:text-base font-black tracking-tight font-display text-white whitespace-nowrap">
-                CYBER<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyber-green">KALI</span>
+                TRY<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyber-green">KALI</span>
               </span>
               <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-cyber-green font-mono font-bold tracking-wide whitespace-nowrap hidden sm:inline">
                 v2.5

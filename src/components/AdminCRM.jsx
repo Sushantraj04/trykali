@@ -154,7 +154,7 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `cyberkali_crm_users_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `trykali_crm_users_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -251,7 +251,7 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
 
           <div>
             <h1 className="text-2xl font-black text-white tracking-tight font-display">
-              CyberKali Operator CRM &amp; Admin Portal
+              TryKali Operator CRM &amp; Admin Portal
             </h1>
             <p className="text-xs text-slate-400 font-mono mt-1">
               Restricted Area • Master Session Telemetry &amp; User Retention Dashboard
@@ -319,7 +319,7 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight font-display flex items-center space-x-2.5">
-                  <span>CyberKali Operator CRM & Admin Panel</span>
+                  <span>TryKali Operator CRM & Admin Panel</span>
                   <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-mono font-bold border border-rose-500/30">
                     RESTRICTED ROOT
                   </span>
@@ -451,7 +451,7 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
               <span>Inactivity & Retention Telemetry (Months Inactive Distribution)</span>
             </h2>
             <p className="text-xs text-slate-400 font-mono mt-0.5">
-              Tracks how many operators haven't visited CyberKali in 1 month, 2-3 months, or 6+ months.
+              Tracks how many operators haven't visited TryKali in 1 month, 2-3 months, or 6+ months.
             </p>
           </div>
 

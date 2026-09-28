@@ -8,7 +8,7 @@ export function HackingIntroAnimation({ onComplete }) {
   const canvasRef = useRef(null);
 
   const BOOT_LOGS = [
-    { text: "INITIALIZING CYBERKALI V2.5 SANDBOX KERNEL 6.12-AMD64...", delay: 0 },
+    { text: "INITIALIZING TRYKALI V2.5 SANDBOX KERNEL 6.12-AMD64...", delay: 0 },
     { text: "ESTABLISHING ENCRYPTED VNET TUNNEL (AES-256-GCM)...", delay: 900 },
     { text: "CALIBRATING ENCRYPTED CLOUD DATASTORE... [200 OK]", delay: 1800 },
     { text: "CALIBRATING 600+ KALI TOOLS & EXPLOIT FRAMEWORKS...", delay: 2700 },
@@ -134,7 +134,7 @@ export function HackingIntroAnimation({ onComplete }) {
         {/* Brand & Subtitle */}
         <div className="text-center space-y-1">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
-            CYBER<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyber-green to-cyan-300">KALI</span>
+            TRY<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyber-green to-cyan-300">KALI</span>
           </h1>
           <p className="text-xs text-cyber-green font-mono uppercase tracking-widest flex items-center justify-center space-x-2">
             <Zap className="w-3.5 h-3.5 animate-pulse" />

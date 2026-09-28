@@ -82,7 +82,7 @@ export function AuthGate({ onAuthSuccess }) {
 
           <div>
             <h1 className="text-2xl font-extrabold text-white tracking-tight font-display">
-              CYBER<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyber-green to-cyan-300">KALI</span>
+              TRY<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyber-green to-cyan-300">KALI</span>
             </h1>
             <p className="text-xs text-slate-400 font-mono mt-1">
               Restricted Access • Operator Authentication Required

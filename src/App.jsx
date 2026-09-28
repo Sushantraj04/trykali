@@ -337,7 +337,7 @@ export default function App() {
         {/* Footer */}
         <footer className="bg-[#070a12]/80 backdrop-blur-md border-t border-[#1a2333] py-6 text-center text-xs text-slate-500 font-mono mt-auto">
           <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
-            <span>CyberKali Learning Platform © 2026. Professional Ethical Hacking Education.</span>
+            <span>TryKali Learning Platform © 2026. Professional Ethical Hacking Education.</span>
             <div className="flex items-center space-x-4">
               <span className="text-cyber-green font-semibold">100% In-Browser Practical Labs</span>
               <span>•</span>
