@@ -11,33 +11,33 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
       return { 
         title: "Red Team Elite", 
         level: 4, 
-        badgeBg: "bg-rose-500/10 text-rose-300 border-rose-500/30" 
+        badgeBg: "bg-rose-500/15 text-rose-300 border-rose-500/40 shadow-rose-500/10" 
       };
     }
     if (xp >= 300) {
       return { 
         title: "Security Specialist", 
         level: 3, 
-        badgeBg: "bg-amber-500/10 text-amber-300 border-amber-500/30" 
+        badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-amber-500/10" 
       };
     }
     if (xp >= 200) {
       return { 
         title: "Junior Pentester", 
         level: 2, 
-        badgeBg: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30" 
+        badgeBg: "bg-cyan-500/15 text-cyan-300 border-cyan-500/40 shadow-cyan-500/10" 
       };
     }
     return { 
       title: "Novice Hacker", 
       level: 1, 
-      badgeBg: "bg-cyber-green/10 text-cyber-green border-cyber-green/30" 
+      badgeBg: "bg-cyber-green/15 text-cyber-green border-cyber-green/40 shadow-cyber-green/10" 
     };
   };
 
   const rank = getRank(totalXP);
 
-  // Modern, clean, professionally aligned Navigation Items
+  // Modern, clean, luxury Navigation Items
   const NAV_ITEMS = [
     { 
       id: 'dashboard', 
@@ -83,45 +83,45 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
   ];
 
   return (
-    <header className="sticky top-0 z-50 px-2 sm:px-4 lg:px-6 pt-2 pb-1">
-      {/* Floating Island Glass Capsule */}
-      <div className="w-full max-w-[1440px] mx-auto rounded-2xl bg-[#060913]/92 backdrop-blur-2xl border border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.55)]">
-        {/* Subtle Ambient Glowing Edge Accent */}
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-green/45 to-transparent rounded-t-2xl" />
+    <header className="sticky top-0 z-50 px-2 sm:px-3 lg:px-5 pt-2 pb-1">
+      {/* Luxury Obsidian Glass Floating Island Capsule */}
+      <div className="w-full max-w-[1440px] mx-auto rounded-2xl bg-[#050814]/95 backdrop-blur-2xl border border-cyber-green/25 shadow-[0_12px_45px_rgba(0,0,0,0.7),0_0_20px_rgba(0,255,136,0.06)]">
+        {/* Glowing Ambient Top Edge Line */}
+        <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-cyber-green/70 via-cyan-400/40 to-transparent rounded-t-2xl" />
 
-        <div className="px-3 sm:px-4 py-2 flex items-center justify-between gap-2 lg:gap-4">
-          {/* 1. Left: Brand & Sandbox Status */}
+        <div className="px-2.5 sm:px-3.5 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5">
+          {/* 1. Left: Luxury Brand & Logo */}
           <div 
-            className="flex items-center space-x-2.5 cursor-pointer select-none group shrink-0" 
+            className="flex items-center space-x-2 cursor-pointer select-none group shrink-0" 
             onClick={() => setActiveTab('dashboard')}
             title="Go to Dashboard"
           >
             {/* Holographic Border Icon */}
             <div className="relative">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-cyber-green via-emerald-400 to-cyan-500 p-[1.5px] shadow-sm shadow-cyber-green/20 group-hover:scale-105 transition-transform duration-200">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyber-green via-emerald-400 to-cyan-500 p-[1.5px] shadow-sm shadow-cyber-green/20 group-hover:scale-105 transition-transform duration-200">
                 <div className="w-full h-full bg-[#070b15] rounded-[10px] flex items-center justify-center">
                   <Terminal className="w-4 h-4 text-cyber-green" />
                 </div>
               </div>
-              {/* Online Pulse Ping Beacon */}
+              {/* Online Pulse Beacon */}
               <span className="absolute -bottom-0.5 -right-0.5 flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-green opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyber-green border-2 border-[#060913]"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyber-green border-2 border-[#050814]"></span>
               </span>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <span className="text-base sm:text-lg font-extrabold tracking-tight font-display text-white whitespace-nowrap">
+            <div className="flex items-center space-x-1.5">
+              <span className="text-sm sm:text-base font-black tracking-tight font-display text-white whitespace-nowrap">
                 CYBER<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyber-green">KALI</span>
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-cyber-green font-mono font-semibold tracking-wide whitespace-nowrap">
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-cyber-green font-mono font-bold tracking-wide whitespace-nowrap hidden sm:inline">
                 v2.5
               </span>
             </div>
           </div>
 
-          {/* 2. Center: Segmented Navigation Bar */}
-          <nav className="hidden lg:flex items-center bg-[#04060d]/90 p-1 rounded-xl border border-white/8 space-x-1 shrink-0">
+          {/* 2. Center: Luxury Segmented Navigation Tabs (Responsive & Never overflows screen) */}
+          <nav className="hidden lg:flex items-center bg-[#030610]/95 p-1 rounded-xl border border-white/8 space-x-0.5 xl:space-x-1 overflow-x-auto scrollbar-none min-w-0 max-w-fit mx-1 xl:mx-auto">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -129,10 +129,10 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`whitespace-nowrap flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-display transition-all duration-150 cursor-pointer border ${
+                  className={`whitespace-nowrap flex items-center space-x-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-display transition-all duration-150 cursor-pointer border shrink-0 ${
                     isActive
-                      ? 'bg-cyber-green/12 text-cyber-green border-cyber-green/35 shadow-[0_0_12px_rgba(0,255,136,0.15)] font-semibold'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5 border-transparent font-medium'
+                      ? 'bg-cyber-green/15 text-cyber-green border-cyber-green/40 shadow-[0_0_14px_rgba(0,255,136,0.18)] font-bold'
+                      : 'text-slate-400 hover:text-white hover:bg-white/[0.06] border-transparent font-medium'
                   }`}
                 >
                   <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-cyber-green' : 'text-slate-400'}`} />
@@ -149,85 +149,81 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
             })}
           </nav>
 
-          {/* 3. Right: Unified Operator HUD Capsule */}
-          <div className="flex items-center space-x-2 shrink-0">
+          {/* 3. Right: Luxury Operator Station HUD (Always 100% Visible, Never Cut Off) */}
+          <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0 z-10">
             {user ? (
-              /* Authenticated Operator HUD: Rank + XP + Profile + Logout */
-              <div className="flex items-center bg-[#04060d]/90 border border-white/10 rounded-xl p-1 shadow-md space-x-1 whitespace-nowrap">
-                {/* Operator Rank Badge */}
+              /* Authenticated Operator HUD: Rank + Glowing XP + Profile + Prominent Logout */
+              <div className="flex items-center bg-[#030610]/95 border border-white/10 rounded-xl p-1 shadow-[0_4px_25px_rgba(0,0,0,0.6)] space-x-1.5 whitespace-nowrap backdrop-blur-xl">
+                {/* 1. Dynamic Rank Pill */}
                 <div 
-                  className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold tracking-tight shadow-sm whitespace-nowrap ${rank.badgeBg}`}
+                  className={`flex items-center space-x-1.5 px-2 sm:px-2.5 py-1 rounded-lg border text-xs font-mono font-bold tracking-tight shadow-sm whitespace-nowrap ${rank.badgeBg}`}
                   title={`Operator Rank: ${rank.title} (Level ${rank.level})`}
                 >
                   <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
-                  <span>{rank.title}</span>
+                  <span className="hidden sm:inline">{rank.title}</span>
+                  <span className="sm:hidden">Lvl {rank.level}</span>
                 </div>
 
-                {/* Vertical Divider */}
-                <div className="w-px h-3.5 bg-white/10 mx-0.5 shrink-0" />
-
-                {/* XP Pill */}
+                {/* 2. Prominent Score / XP Pill (Golden Glowing) */}
                 <div 
-                  className="flex items-center space-x-1 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-xs font-mono font-bold text-amber-300 whitespace-nowrap"
-                  title="Accumulated Practice Reputation XP"
+                  className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500/20 to-yellow-500/10 border border-amber-500/40 text-xs font-mono font-extrabold text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.25)] whitespace-nowrap"
+                  title="Accumulated Practice Reputation Score"
                 >
                   <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                   <span>{totalXP} XP</span>
                 </div>
 
-                {/* Vertical Divider */}
-                <div className="w-px h-3.5 bg-white/10 mx-0.5 shrink-0" />
+                {/* Divider */}
+                <div className="w-px h-4 bg-white/15 mx-0.5 shrink-0" />
 
-                {/* User Handle & Profile Link */}
+                {/* 3. User Profile */}
                 <button
                   onClick={() => setActiveTab('dashboard')}
                   className="flex items-center space-x-1.5 px-2 py-1 rounded-lg hover:bg-white/5 transition-all text-xs font-mono text-slate-200 hover:text-cyber-green group cursor-pointer"
-                  title="Open Dashboard"
+                  title="Open Operator Dashboard"
                 >
-                  <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-cyber-green to-emerald-400 p-[1px] shrink-0">
-                    <div className="w-full h-full bg-[#0a0d17] rounded-[5px] flex items-center justify-center text-cyber-green font-mono font-bold text-[10px]">
+                  <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-cyber-green via-emerald-400 to-teal-300 p-[1px] shrink-0 shadow-sm shadow-cyber-green/20">
+                    <div className="w-full h-full bg-[#080d18] rounded-[5px] flex items-center justify-center text-cyber-green font-mono font-bold text-[10px]">
                       {(user.username || user.email || 'O')[0].toUpperCase()}
                     </div>
                   </div>
-                  <span className="text-slate-200 group-hover:text-cyber-green font-medium whitespace-nowrap hidden sm:inline">
+                  <span className="text-slate-200 group-hover:text-cyber-green font-medium whitespace-nowrap hidden 2xl:inline">
                     @{user.username || user.email?.split('@')[0]}
                   </span>
                 </button>
 
-                {/* Logout Button */}
+                {/* 4. Luxury Prominent Logout Button */}
                 <button
                   onClick={onLogout}
-                  className="p-1 rounded-md text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer shrink-0"
-                  title="Sign Out"
+                  className="flex items-center space-x-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 hover:border-rose-500/70 text-xs font-mono font-bold transition-all shadow-sm hover:shadow-[0_0_14px_rgba(244,63,94,0.35)] cursor-pointer shrink-0"
+                  title="Sign Out of Station"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  <LogOut className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                  <span className="font-mono text-xs">Logout</span>
                 </button>
               </div>
             ) : (
-              /* Guest Operator HUD: Unified Rank + XP + Connect ID */
-              <div className="flex items-center bg-[#04060d]/90 border border-white/10 rounded-xl p-1 shadow-md space-x-1 whitespace-nowrap">
+              /* Guest Operator HUD: Rank + XP + Connect ID */
+              <div className="flex items-center bg-[#030610]/95 border border-white/10 rounded-xl p-1 shadow-[0_4px_25px_rgba(0,0,0,0.6)] space-x-1.5 whitespace-nowrap backdrop-blur-xl">
                 {/* Operator Rank Badge */}
-                <div className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold ${rank.badgeBg}`}>
+                <div className={`flex items-center space-x-1.5 px-2 sm:px-2.5 py-1 rounded-lg border text-xs font-mono font-bold ${rank.badgeBg}`}>
                   <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
                   <span>{rank.title}</span>
                 </div>
 
-                {/* Vertical Divider */}
-                <div className="w-px h-3.5 bg-white/10 mx-0.5 shrink-0" />
-
-                {/* XP Pill */}
-                <div className="flex items-center space-x-1 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-xs font-mono font-bold text-amber-300">
+                {/* Prominent XP Score */}
+                <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500/20 to-yellow-500/10 border border-amber-500/40 text-xs font-mono font-extrabold text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.25)]">
                   <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                   <span>{totalXP} XP</span>
                 </div>
 
-                {/* Vertical Divider */}
-                <div className="w-px h-3.5 bg-white/10 mx-0.5 shrink-0" />
+                {/* Divider */}
+                <div className="w-px h-4 bg-white/15 mx-0.5 shrink-0" />
 
                 {/* Connect ID Action */}
                 <button
                   onClick={onOpenAuth}
-                  className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-cyber-green to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs transition-all shadow-sm shadow-cyber-green/20 hover:scale-105 active:scale-95 cursor-pointer font-display whitespace-nowrap"
+                  className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-cyber-green via-emerald-400 to-teal-300 hover:from-emerald-400 hover:to-teal-200 text-slate-950 font-black text-xs transition-all shadow-md shadow-cyber-green/25 hover:scale-105 active:scale-95 cursor-pointer font-display whitespace-nowrap"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-slate-950 fill-current shrink-0" />
                   <span>Connect ID</span>
@@ -260,7 +256,7 @@ export function Header({ activeTab, setActiveTab, totalXP, user, onOpenAuth, onL
                 onClick={() => setActiveTab(item.id)}
                 className={`px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shrink-0 transition-all font-display text-xs whitespace-nowrap border ${
                   isActive 
-                    ? 'bg-cyber-green/12 text-cyber-green border-cyber-green/35 font-semibold' 
+                    ? 'bg-cyber-green/15 text-cyber-green border-cyber-green/40 font-bold shadow-[0_0_12px_rgba(0,255,136,0.15)]' 
                     : 'text-slate-400 hover:text-white border-transparent'
                 }`}
               >
