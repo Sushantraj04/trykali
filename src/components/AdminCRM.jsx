@@ -265,7 +265,8 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
                 type="password"
                 value={adminPinInput}
                 onChange={(e) => setAdminPinInput(e.target.value)}
-                placeholder="Enter Admin Master Passkey..."
+                onKeyDown={(e) => { if (e.key === 'Enter') handleUnlockAdmin(e); }}
+                placeholder="Enter Master Passkey & press Enter..."
                 className="w-full bg-[#070b14] border border-slate-800 focus:border-rose-500 rounded-xl pl-10 pr-4 py-3 text-xs sm:text-sm font-mono text-white focus:outline-none shadow-inner"
               />
             </div>
@@ -276,13 +277,6 @@ export function AdminCRMView({ currentUser, onNavigate, onSendToTerminal, onOpen
                 <span>{pinError}</span>
               </p>
             )}
-
-            <button
-              type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 hover:from-rose-500 hover:to-amber-400 text-white font-bold text-xs transition-all shadow-lg shadow-rose-600/25 cursor-pointer font-mono"
-            >
-              Verify Master Credentials
-            </button>
           </form>
 
           <div className="pt-2">

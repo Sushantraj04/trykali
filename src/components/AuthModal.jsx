@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Lock, Mail, User, Shield, CheckCircle2, AlertCircle, Database, UserPlus, LogIn, ArrowRight } from 'lucide-react';
-import { cyberAuth, isSupabaseConfigured } from '../utils/supabaseClient';
+import { X, Lock, Mail, User, Shield, CheckCircle2, AlertCircle, UserPlus, LogIn, ArrowRight } from 'lucide-react';
+import { cyberAuth } from '../utils/supabaseClient';
 
 export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -104,21 +104,6 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
                 : 'Enter your registered credentials to access your profile.'}
             </p>
           </div>
-        </div>
-
-        {/* Database Status Indicator */}
-        <div className="mb-4 p-2.5 rounded-lg bg-[#111622] border border-slate-800 flex items-center justify-between text-[11px] font-mono">
-          <div className="flex items-center space-x-2">
-            <Database className={`w-3.5 h-3.5 ${isSupabaseConfigured ? 'text-cyber-green' : 'text-cyan-400'}`} />
-            <span className="text-slate-300">
-              Auth Engine: <strong className={isSupabaseConfigured ? 'text-cyber-green' : 'text-cyan-400'}>
-                {isSupabaseConfigured ? 'Supabase PostgreSQL Cloud' : 'Multi-User Database'}
-              </strong>
-            </span>
-          </div>
-          <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
-            Strict Auth
-          </span>
         </div>
 
         {/* Tab Switcher */}

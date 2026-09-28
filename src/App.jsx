@@ -11,6 +11,8 @@ import { SocialEngineeringSuite } from './components/SocialEngineering';
 import { AdminCRMView } from './components/AdminCRM';
 import { BinaryBackground } from './components/BinaryBackground';
 import { AuthModal } from './components/AuthModal';
+import { HackingIntroAnimation } from './components/HackingIntroAnimation';
+import { AuthGate } from './components/AuthGate';
 import { TerminalSimulator } from './utils/terminalEngine';
 import { cyberAuth } from './utils/supabaseClient';
 import { LABS_DATA } from './data/labsData';
@@ -72,7 +74,8 @@ export default function App() {
   const [terminalContext, setTerminalContext] = useState('');
   const [commandToInject, setCommandToInject] = useState('');
 
-  // User Authentication State
+  // User Authentication State & 5-Second Hacking Boot Animation
+  const [isIntroPlaying, setIsIntroPlaying] = useState(true);
   const [user, setUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
@@ -175,7 +178,9 @@ export default function App() {
   const handleAuthSuccess = (loggedUser) => {
     setUser(loggedUser);
     applyUserProgress(loggedUser);
-    setActiveTab('dashboard');
+    if (activeTab !== 'admin') {
+      setActiveTab('dashboard');
+    }
   };
 
   // Handle logout
@@ -186,21 +191,34 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans relative overflow-x-hidden selection:bg-cyber-green selection:text-black">
-      {/* Animated Binary Numbers Stream in Background */}
-      <BinaryBackground />
+    <>
+      {/* 5-Second Cyber Hacking Boot Animation */}
+      {isIntroPlaying && (
+        <HackingIntroAnimation onComplete={() => setIsIntroPlaying(false)} />
+      )}
 
-      {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Top Navigation */}
-        <Header
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          totalXP={totalXP}
-          user={user}
-          onOpenAuth={() => setIsAuthOpen(true)}
-          onLogout={handleLogout}
-        />
+      {/* Strict Authentication Barrier: Zero Access Without Sign Up / Sign In */}
+      {!user ? (
+        <div className="min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans relative overflow-x-hidden selection:bg-cyber-green selection:text-black">
+          <BinaryBackground />
+          <AuthGate onAuthSuccess={handleAuthSuccess} />
+        </div>
+      ) : (
+        <div className="min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans relative overflow-x-hidden selection:bg-cyber-green selection:text-black">
+          {/* Animated Binary Numbers Stream in Background */}
+          <BinaryBackground />
+
+          {/* Foreground Content */}
+          <div className="relative z-10 flex flex-col min-h-screen">
+            {/* Top Navigation */}
+            <Header
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              totalXP={totalXP}
+              user={user}
+              onOpenAuth={() => setIsAuthOpen(true)}
+              onLogout={handleLogout}
+            />
 
         {/* Main Workspace Area */}
         <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
@@ -340,7 +358,9 @@ export default function App() {
           onClose={() => setIsAuthOpen(false)}
           onAuthSuccess={handleAuthSuccess}
         />
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
